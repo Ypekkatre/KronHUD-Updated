@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 
 
 public class PingHud extends SimpleTextHudEntry {
-    public static final Identifier ID = new Identifier("kronhud", "pinghud");
+    public static final Identifier ID = Identifier.of("kronhud", "pinghud");
 
     public PingHud() {
         super();

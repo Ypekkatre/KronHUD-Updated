@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ArrowHud extends TextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "arrowhud");
+    public static final Identifier ID = Identifier.of("kronhud", "arrowhud");
     private int arrows = 0;
     private KronBoolean dynamic = new KronBoolean("dynamic", ID.getPath(), false);
     private KronBoolean allArrowTypes = new KronBoolean("allArrowTypes", ID.getPath(), false);

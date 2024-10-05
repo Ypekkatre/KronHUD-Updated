@@ -2,6 +2,7 @@ package io.github.darkkronicle.kronhud.util;
 
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat.DrawMode;
@@ -123,12 +124,14 @@ public class ItemUtil {
 
     public void renderGuiQuad(BufferBuilder buffer, int x, int y, int width, int height, int red, int green, int blue,
             int alpha) {
-        buffer.begin(DrawMode.QUADS, VertexFormats.POSITION_COLOR);
-        buffer.vertex(x, y, 0.0D).color(red, green, blue, alpha).next();
-        buffer.vertex(x, y + height, 0.0D).color(red, green, blue, alpha).next();
-        buffer.vertex(x + width, y + height, 0.0D).color(red, green, blue, alpha).next();
-        buffer.vertex(x + width, y, 0.0D).color(red, green, blue, alpha).next();
-        Tessellator.getInstance().draw();
+        //buffer.begin(DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+		Tessellator.getInstance().begin(DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+        buffer.vertex(x, y, 0.0f).color(red, green, blue, alpha);
+        buffer.vertex(x, y + height, 0.0f).color(red, green, blue, alpha);
+        buffer.vertex(x + width, y + height, 0.0f).color(red, green, blue, alpha);
+        buffer.vertex(x + width, y, 0.0f).color(red, green, blue, alpha);
+		BufferRenderer.drawWithGlobalProgram(buffer.end());
+        //Tessellator.getInstance().draw();
     }
 
     public static class ItemStorage {

@@ -15,6 +15,6 @@ public abstract class MixinClientPlayerEntity {
     private void alwaysPressed(CallbackInfo info) {
         ToggleSprintHud hud = (ToggleSprintHud) HudManager.getInstance().get(ToggleSprintHud.ID);
         MinecraftClient mc = MinecraftClient.getInstance();
-        mc.player.setSprinting(hud.getSprintToggled().getValue() || mc.options.sprintKey.isPressed());
+        //mc.player.setSprinting(hud.getSprintToggled().getValue() || mc.options.sprintKey.isPressed());
     }
 }

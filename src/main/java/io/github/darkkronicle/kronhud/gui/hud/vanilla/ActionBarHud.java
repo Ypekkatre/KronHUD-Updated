@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ActionBarHud extends TextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "actionbarhud");
+    public static final Identifier ID = Identifier.of("kronhud", "actionbarhud");
 
     public KronInteger timeShown = new KronInteger("timeshown", ID.getPath(), 60, 40, 300);
     public KronBoolean customTextColor = new KronBoolean("customtextcolor", ID.getPath(), false);

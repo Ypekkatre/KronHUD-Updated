@@ -22,15 +22,29 @@ public abstract class MixinPlayerEntity extends Entity {
 
     // Source moehreag
     // https://github.com/AxolotlClient/AxolotlClient-mod/blob/4ae2678bfe9e0908be1a7a34e61e689c8005ae0a/src/main/java/io/github/axolotlclient/mixin/PlayerEntityMixin.java#L27-L35
-    @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getAttributeValue(Lnet/minecraft/entity/attribute/EntityAttribute;)D"))
+	//*
+    //@Inject(method = "attack", at = @At(value = "INVOKE"))
+	@Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getAttributeValue(Lnet/minecraft/registry/entry/RegistryEntry;)D"))
     private void getReach(Entity entity, CallbackInfo ci){
         // This is only ever called when the client attacks. Without more work not possible to get when someone else attacks.
-        if (getId() == MinecraftClient.getInstance().player.getId() && entity != null){
+		
+        /*if (getId() == MinecraftClient.getInstance().player.getId() && entity != null){
             ReachHud reachDisplayHud = (ReachHud) HudManager.getInstance().get(ReachHud.ID);
             reachDisplayHud.updateDistance(this, entity);
             ComboHud comboHud = (ComboHud) HudManager.getInstance().get(ComboHud.ID);
             comboHud.onEntityAttack(entity);
-        }
+        }*/
+		if (entity != null){
+			if ((Object) this == MinecraftClient.getInstance().player || entity.equals(MinecraftClient.getInstance().player)) {
+				
+				ReachHud reachDisplayHud = (ReachHud) HudManager.getInstance().get(ReachHud.ID);
+				reachDisplayHud.updateDistance(this, entity);
+				
+				ComboHud comboHud = (ComboHud) HudManager.getInstance().get(ComboHud.ID);
+				comboHud.onEntityAttack(entity);
+				
+			}
+		}
     }
-
+//*/
 }

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ItemUpdateHud extends TextHudEntry {
-    public static final Identifier ID = new Identifier("kronhud", "itemupdatehud");
+    public static final Identifier ID = Identifier.of("kronhud", "itemupdatehud");
 
     private List<ItemUtil.ItemStorage> oldItems = new ArrayList<>();
     private ArrayList<ItemUtil.TimedItemStorage> removed;

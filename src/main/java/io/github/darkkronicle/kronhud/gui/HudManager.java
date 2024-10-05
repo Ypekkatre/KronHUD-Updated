@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
+import net.minecraft.client.render.RenderTickCounter;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -72,7 +73,8 @@ public class HudManager {
         return entries.get(identifier);
     }
 
-    public void render(DrawContext context, float delta) {
+    public void render(DrawContext context, RenderTickCounter tickDeltaManager) {
+		float delta = tickDeltaManager.getTickDelta(true);
         if (!(client.currentScreen instanceof HudEditScreen) && !client.getDebugHud().shouldShowDebugHud()) {
             for (HudEntry hud : getEntries()) {
                 if (hud.isEnabled()) {

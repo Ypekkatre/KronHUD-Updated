@@ -19,12 +19,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import org.joml.Matrix4fStack;
 
 import java.util.List;
 
 public class PlayerHud extends BoxHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "playerhud");
+    public static final Identifier ID = Identifier.of("kronhud", "playerhud");
 
     private final KronDouble rotation = new KronDouble("rotation", ID.getPath(), 0, 0, 360);
     private final KronBoolean dynamicRotation = new KronBoolean("dynamicrotation", ID.getPath(), true);
@@ -50,15 +51,15 @@ public class PlayerHud extends BoxHudEntry {
         renderPlayer(getTruePos().x() + 31 * getScale(), getTruePos().y() + 86 * getScale(), 0); // If delta was delta, it would start jittering
     }
 
-    public void renderPlayer(double x, double y, float delta) {
+    public void renderPlayer(float x, float y, float delta) {
         if (client.player == null) {
             return;
         }
 
         float lerpY = (lastYOffset + ((yOffset - lastYOffset) * delta));
 
-        MatrixStack matrixStack = RenderSystem.getModelViewStack();
-        matrixStack.push();
+        Matrix4fStack matrixStack = RenderSystem.getModelViewStack();
+        matrixStack.pushMatrix();
         matrixStack.translate(x, y - lerpY, 1050);
         matrixStack.scale(1, 1, -1);
 
@@ -91,7 +92,7 @@ public class PlayerHud extends BoxHudEntry {
         renderer.render(client.player, 0, 0, 0, 0, delta, nextStack, immediate, 15728880);
         immediate.draw();
         renderer.setRenderShadows(true);
-        matrixStack.pop();
+        matrixStack.popMatrix();
 
         client.player.setYaw(pastYaw);
         client.player.prevYaw = pastPrevYaw;
@@ -124,7 +125,7 @@ public class PlayerHud extends BoxHudEntry {
         } else if (client.player != null && client.player.isFallFlying()) {
             // Elytra!
 
-            float j = (float)client.player.getRoll() + 1;
+            float j = (float)client.player.getFallFlyingTicks() + 1;
             float k = MathHelper.clamp(j * j / 100.0F, 0.0F, 1.0F);
 
             float pitch = k * (-90.0F - client.player.getPitch()) + 90;

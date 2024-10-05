@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class KeystrokeHud extends TextHudEntry {
-    public static final Identifier ID = new Identifier("kronhud", "keystrokehud");
+    public static final Identifier ID = Identifier.of("kronhud", "keystrokehud");
 
     private final KronColor pressedTextColor = new KronColor("heldtextcolor", ID.getPath(), new Color(0xFF000000));
     private final KronExtendedColor pressedBackgroundColor = new KronExtendedColor("heldbackgroundcolor", ID.getPath(), new ExtendedColor(0x64FFFFFF, ExtendedColor.ChromaOptions.getDefault()));

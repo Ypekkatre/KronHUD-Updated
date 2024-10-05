@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 
 public class IPHud extends SimpleTextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "iphud");
+    public static final Identifier ID = Identifier.of("kronhud", "iphud");
 
     public IPHud() {
         super(115, 13);

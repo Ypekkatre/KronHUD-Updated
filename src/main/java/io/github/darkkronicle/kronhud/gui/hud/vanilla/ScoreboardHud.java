@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class ScoreboardHud extends TextHudEntry implements DynamicallyPositionable {
 
-    public static final Identifier ID = new Identifier("kronhud", "scoreboardhud");
+    public static final Identifier ID = Identifier.of("kronhud", "scoreboardhud");
     public static final ScoreboardObjective placeholder = Util.make(() -> {
         Scoreboard placeScore = new Scoreboard();
         ScoreboardObjective objective = placeScore.addObjective("placeholder", ScoreboardCriterion.DUMMY,

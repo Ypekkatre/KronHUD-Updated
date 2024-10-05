@@ -21,7 +21,7 @@ import java.util.List;
 // https://github.com/AxolotlClient/AxolotlClient-mod/blob/4ae2678bfe9e0908be1a7a34e61e689c8005ae0a/src/main/java/io/github/axolotlclient/modules/hud/gui/hud/ReachDisplayHud.java
 public class ReachHud extends SimpleTextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "reachhud");
+    public static final Identifier ID = Identifier.of("kronhud", "reachhud");
     private final KronInteger decimalPlaces = new KronInteger("decimalplaces", ID.getPath(), 0, 0, 15);
 
     private String currentDist;
@@ -76,7 +76,6 @@ public class ReachHud extends SimpleTextHudEntry {
         Vec3d possibleHits = camera.add(rotation.x * d, rotation.y * d, rotation.z * d);
         Box box = attacking.getBoundingBox().stretch(rotation.multiply(d)).expand(1.0, 1.0, 1.0);
 
-
         EntityHitResult result = ProjectileUtil.raycast(attacking, camera, possibleHits, box, entity -> entity.getId() == receiving.getId(), d);
         if (result == null || result.getEntity() == null) {
             // This should not happen...
@@ -95,6 +94,7 @@ public class ReachHud extends SimpleTextHudEntry {
         }
         if (distance < 0) {
             // This should not happen...
+			//KronHUD.LOGGER.warn("Invalid attack distance: ", distance);
             currentDist = "NaN";
             return;
         }

@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.minecraft.client.render.RenderTickCounter;
 
 @Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
@@ -25,9 +26,9 @@ public class MixinInGameHud {
 
     @Shadow
     private int overlayRemaining;
-
+	
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
-    public void renderStatusEffect(DrawContext context, CallbackInfo ci) {
+    public void renderStatusEffect(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         PotionsHud hud = (PotionsHud) HudManager.getInstance().get(PotionsHud.ID);
         if (hud != null && hud.isEnabled()) {
             ci.cancel();
@@ -35,7 +36,7 @@ public class MixinInGameHud {
     }
 
     @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
-    public void renderCrosshair(DrawContext context, CallbackInfo ci) {
+    public void renderCrosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         CrosshairHud hud = (CrosshairHud) HudManager.getInstance().get(CrosshairHud.ID);
         if (hud != null && hud.isEnabled()) {
             ci.cancel();
@@ -43,13 +44,13 @@ public class MixinInGameHud {
     }
 
     @Inject(method = "renderScoreboardSidebar", at = @At("HEAD"), cancellable = true)
-    public void renderScoreboard(DrawContext context, ScoreboardObjective objective, CallbackInfo ci) {
+    public void renderScoreboard(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ScoreboardHud hud = (ScoreboardHud) HudManager.getInstance().get(ScoreboardHud.ID);
         if (hud != null && hud.isEnabled()) {
             ci.cancel();
         }
     }
-
+/*
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTextWithShadow(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;III)I"))
     public int getActionBar(DrawContext instance, TextRenderer textRenderer, Text text, int x, int y, int color) {
         ActionBarHud hud = (ActionBarHud) HudManager.getInstance().get(ActionBarHud.ID);
@@ -60,6 +61,7 @@ public class MixinInGameHud {
             return instance.drawTextWithShadow(textRenderer, text, x, y, color);
         }
     }
+//*/
 
     @Inject(method = "setOverlayMessage", at = @At("TAIL"))
     public void setDuration(Text message, boolean tinted, CallbackInfo ci) {
@@ -68,6 +70,6 @@ public class MixinInGameHud {
             overlayRemaining = hud.timeShown.getValue();
         }
     }
-
+/**/
 
 }

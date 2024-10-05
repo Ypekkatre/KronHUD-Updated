@@ -24,8 +24,8 @@ import java.util.UUID;
 
 public class BossBarHud extends TextHudEntry implements DynamicallyPositionable {
 
-    public static final Identifier ID = new Identifier("kronhud", "bossbarhud");
-    private static final Identifier BARS_TEXTURE = new Identifier("textures/gui/bars.png");
+    public static final Identifier ID = Identifier.of("kronhud", "bossbarhud");
+    private static final Identifier BARS_TEXTURE = Identifier.of("textures/gui/bars.png");
     private final BossBar placeholder = new CustomBossBar(Text.literal("Boss bar"), BossBar.Color.WHITE, BossBar.Style.PROGRESS);
     private final BossBar placeholder2 = Util.make(() -> {
         BossBar boss = new CustomBossBar(Text.literal("More boss bars..."), BossBar.Color.PURPLE, BossBar.Style.PROGRESS);

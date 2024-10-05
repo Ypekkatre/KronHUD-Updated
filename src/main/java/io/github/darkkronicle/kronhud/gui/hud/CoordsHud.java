@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CoordsHud extends TextHudEntry implements DynamicallyPositionable {
 
-    public static final Identifier ID = new Identifier("kronhud", "coordshud");
+    public static final Identifier ID = Identifier.of("kronhud", "coordshud");
 
     private final KronColor firstColor = new KronColor("firsttextcolor", ID.getPath(), ColorUtil.SELECTOR_BLUE);
     private final KronColor secondColor = new KronColor("secondtextcolor", ID.getPath(), ColorUtil.WHITE);

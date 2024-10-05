@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ArmorHud extends TextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "armorhud");
+    public static final Identifier ID = Identifier.of("kronhud", "armorhud");
 
     public ArmorHud() {
         super(20, 100, true);

@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 public class HudConfigScreen extends ConfigScreen {
     public HudConfigScreen() {
         super(List.of(
-                Tab.ofOptions(new Identifier("kronhud", "entries"), "option.section.entries", HudManager.getInstance().getEntries().stream().map(HudEntryOption::new).collect(Collectors.toList()))
+                Tab.ofOptions(Identifier.of("kronhud", "entries"), "option.section.entries", HudManager.getInstance().getEntries().stream().map(HudEntryOption::new).collect(Collectors.toList()))
                 ,
                 Tab.ofOptions(
-                    new Identifier(KronHUD.MOD_ID, ConfigHandler.getInstance().general.getKey()),
+                    Identifier.of(KronHUD.MOD_ID, ConfigHandler.getInstance().general.getKey()),
                     ConfigHandler.getInstance().general.getNameKey(),
                     ConfigHandler.getInstance().general.getOptions())
                 ));

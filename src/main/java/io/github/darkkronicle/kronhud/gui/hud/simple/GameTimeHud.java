@@ -23,7 +23,7 @@ import java.util.List;
 
 public class GameTimeHud extends TextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "gametimehud");
+    public static final Identifier ID = Identifier.of("kronhud", "gametimehud");
     private final KronBoolean isAmPm = new KronBoolean("is12hour", ID.getPath(), true, this::updateFormatter);
     private final KronBoolean sleepDisplay = new KronBoolean("showsleep", ID.getPath(), false);
     private final KronBoolean clockDisplay = new KronBoolean("showclock", ID.getPath(), false);

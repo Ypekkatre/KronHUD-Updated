@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class SpeedHud extends SimpleTextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "speedhud");
+    public static final Identifier ID = Identifier.of("kronhud", "speedhud");
     private final static NumberFormat FORMATTER = new DecimalFormat("#0.00");
     private final KronBoolean horizontal = new KronBoolean("horizontal", ID.getPath(), true);
 

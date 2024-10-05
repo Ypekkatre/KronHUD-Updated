@@ -7,7 +7,7 @@ import net.minecraft.util.Util;
 
 public class ComboHud extends SimpleTextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "combohud");
+    public static final Identifier ID = Identifier.of("kronhud", "combohud");
 
     private long lastTime = 0;
     private int target = -1;

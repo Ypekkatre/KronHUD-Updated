@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class ToggleSprintHud extends SimpleTextHudEntry {
 
-    public static final Identifier ID = new Identifier("kronhud", "togglesprint");
+    public static final Identifier ID = Identifier.of("kronhud", "togglesprint");
     private final KronBoolean toggleSprint = new KronBoolean("toggleSprint", ID.getPath(), false);
     private final KronBoolean toggleSneak = new KronBoolean("toggleSneak", ID.getPath(), false);
     private final KronBoolean randomPlaceholder = new KronBoolean("randomPlaceholder", ID.getPath(), false);
@@ -57,7 +57,7 @@ public class ToggleSprintHud extends SimpleTextHudEntry {
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(MinecraftClient.getInstance()
                             .getResourceManager()
-                            .getResourceOrThrow(new Identifier("texts/splashes.txt"))
+                            .getResourceOrThrow(Identifier.of("texts/splashes.txt"))
                             .getInputStream(), StandardCharsets.UTF_8)
             );
             String string;

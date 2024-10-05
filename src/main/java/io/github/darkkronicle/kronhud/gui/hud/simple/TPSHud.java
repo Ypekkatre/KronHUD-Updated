@@ -13,7 +13,7 @@ public class TPSHud extends SimpleTextHudEntry {
     private double tps = -1;
     private final static NumberFormat FORMATTER = new DecimalFormat("#0.00");
 
-    public final static Identifier ID = new Identifier("kronhud", "tpshud");
+    public final static Identifier ID = Identifier.of("kronhud", "tpshud");
 
     @Override
     public Identifier getId() {
@@ -27,6 +27,10 @@ public class TPSHud extends SimpleTextHudEntry {
         }
         return FORMATTER.format(tps) + " TPS";
     }
+
+	public double getNum() {
+		return tps;
+	}
 
     @Override
     public String getPlaceholder() {

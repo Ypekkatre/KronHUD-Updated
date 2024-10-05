@@ -5,7 +5,7 @@ import io.github.darkkronicle.kronhud.mixins.AccessorMinecraftClient;
 import net.minecraft.util.Identifier;
 
 public class FPSHud extends SimpleTextHudEntry {
-    public static final Identifier ID = new Identifier("kronhud", "fpshud");
+    public static final Identifier ID = Identifier.of("kronhud", "fpshud");
 
     public FPSHud() {
         //super(x, y, scale);

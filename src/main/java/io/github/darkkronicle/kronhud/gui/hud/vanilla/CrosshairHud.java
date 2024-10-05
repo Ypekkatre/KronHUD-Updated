@@ -29,12 +29,13 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
+import org.joml.Matrix4fStack;
 
 import java.util.List;
 
 public class CrosshairHud extends AbstractHudEntry implements DynamicallyPositionable {
-    public static final Identifier ID = new Identifier("kronhud", "crosshairhud");
-    private static final Identifier ICONS_TEXTURE = new Identifier("textures/gui/icons.png");
+    public static final Identifier ID = Identifier.of("kronhud", "crosshairhud");
+    private static final Identifier ICONS_TEXTURE = Identifier.of("textures/gui/icons.png");
 
     private final KronOptionList<Crosshair> type = new KronOptionList<>("type", ID.getPath(), Crosshair.CROSS);
     private final KronBoolean showInF5 = new KronBoolean("showInF5", ID.getPath(), false);
@@ -79,15 +80,17 @@ public class CrosshairHud extends AbstractHudEntry implements DynamicallyPositio
             fillRect(context, new Rectangle(pos.x() + (getWidth() / 2) - 1, pos.y() + (getHeight() / 2), 1, 5), color);
         } else if (type.getValue() == Crosshair.DIRECTION) {
             Camera camera = this.client.gameRenderer.getCamera();
-            MatrixStack matrixStack = RenderSystem.getModelViewStack();
-            matrixStack.push();
+            Matrix4fStack matrixStack = RenderSystem.getModelViewStack();
+            matrixStack.pushMatrix();
             matrixStack.translate(getRawX() + ((float) getWidth() / 2), getRawY() + ((float) getHeight() / 2), 0);
-            matrixStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(camera.getPitch()));
-            matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(camera.getYaw()));
-            matrixStack.scale(-getScale(), -getScale(), getScale());
+	    //matrixStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(camera.getPitch()));
+            //matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(camera.getYaw()));
+            matrixStack.rotate(RotationAxis.NEGATIVE_X.rotationDegrees(camera.getPitch()));
+	    matrixStack.rotate(RotationAxis.NEGATIVE_Y.rotationDegrees(camera.getYaw()));
+	    matrixStack.scale(-getScale(), -getScale(), getScale());
             RenderSystem.applyModelViewMatrix();
             RenderSystem.renderCrosshair(10);
-            matrixStack.pop();
+            matrixStack.popMatrix();
             RenderSystem.applyModelViewMatrix();
         } else if (type.getValue() == Crosshair.TEXTURE) {
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

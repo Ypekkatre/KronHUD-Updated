@@ -10,6 +10,8 @@ import io.github.darkkronicle.kronhud.gui.entry.TextHudEntry;
 import io.github.darkkronicle.kronhud.gui.hud.simple.TPSHud;
 import io.github.darkkronicle.kronhud.gui.layout.AnchorPoint;
 import io.github.darkkronicle.kronhud.gui.layout.CardinalOrder;
+import io.github.darkkronicle.kronhud.gui.HudManager;
+import io.github.darkkronicle.kronhud.gui.hud.simple.TPSHud;
 import io.github.darkkronicle.kronhud.util.Rectangle;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -19,13 +21,14 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.Identifier;
+import net.minecraft.registry.entry.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PotionsHud extends TextHudEntry implements DynamicallyPositionable {
 
-    public static final Identifier ID = new Identifier("kronhud", "potionshud");
+    public static final Identifier ID = Identifier.of("kronhud", "potionshud");
 
     private final KronOptionList<AnchorPoint> anchor = DefaultOptions.getAnchorPoint(AnchorPoint.TOP_LEFT);
 
@@ -102,13 +105,16 @@ public class PotionsHud extends TextHudEntry implements DynamicallyPositionable 
     }
 
     private void renderPotion(DrawContext context, StatusEffectInstance effect, int x, int y) {
-        StatusEffect type = effect.getEffectType();
+        RegistryEntry<StatusEffect> type = effect.getEffectType();
+	//StatusEffect type = effect.getEffectType();
         Sprite sprite = client.getStatusEffectSpriteManager().getSprite(type);
+	//Sprite sprite = client.getStatusEffectSpriteManager().getSprite(effect);
 
         RenderSystem.setShaderColor(1, 1, 1, 1);
         context.drawSprite(x, y, 0, 18, 18, sprite);
         if (!iconsOnly.getValue()) {
-            drawString(context, client.textRenderer, StatusEffectUtil.getDurationText(effect, 1, 20), x + 19, y + 5,    //TODO: replace 20 with tickRate (don't know how :[)
+			TPSHud tpsHud = (TPSHud) HudManager.getInstance().get(TPSHud.ID);
+            drawString(context, client.textRenderer, StatusEffectUtil.getDurationText(effect, 1, (float)tpsHud.getNum()), x + 19, y + 5,
                     textColor.getValue().color(), shadow.getValue()
             );
         }

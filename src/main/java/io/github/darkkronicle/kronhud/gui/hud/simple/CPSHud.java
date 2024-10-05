@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CPSHud extends SimpleTextHudEntry {
-    public static final Identifier ID = new Identifier("kronhud", "cpshud");
+    public static final Identifier ID = Identifier.of("kronhud", "cpshud");
 
     private final KronBoolean fromKeybindings = new KronBoolean("cpskeybind", ID.getPath(), false);
     private final KronBoolean rmb = new KronBoolean("rightcps", ID.getPath(), false);

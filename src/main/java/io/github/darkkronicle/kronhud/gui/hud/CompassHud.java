@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CompassHud extends TextHudEntry implements DynamicallyPositionable {
 
-    public final Identifier ID = new Identifier("kronhud", "compasshud");
+    public final Identifier ID = Identifier.of("kronhud", "compasshud");
 
     private final KronInteger widthOption = new KronInteger("width", ID.getPath(), width, 100, 800, this::updateWidth);
 

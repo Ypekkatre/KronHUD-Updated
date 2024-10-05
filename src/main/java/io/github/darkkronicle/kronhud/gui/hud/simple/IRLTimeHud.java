@@ -14,7 +14,7 @@ import java.util.List;
 public class IRLTimeHud extends SimpleTextHudEntry {
     // https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
 
-    public static final Identifier ID = new Identifier("kronhud", "irltimehud");
+    public static final Identifier ID = Identifier.of("kronhud", "irltimehud");
 
     private DateTimeFormatter formatter = null;
     private boolean error = false;

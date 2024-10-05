@@ -50,6 +50,8 @@ public class MixinInGameHud {
             ci.cancel();
         }
     }
+
+//TODO: Fix mixin
 /*
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTextWithShadow(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;III)I"))
     public int getActionBar(DrawContext instance, TextRenderer textRenderer, Text text, int x, int y, int color) {

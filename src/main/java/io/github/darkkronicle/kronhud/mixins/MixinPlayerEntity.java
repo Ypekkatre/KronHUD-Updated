@@ -28,18 +28,18 @@ public abstract class MixinPlayerEntity extends Entity {
     private void getReach(Entity entity, CallbackInfo ci){
         // This is only ever called when the client attacks. Without more work not possible to get when someone else attacks.
 		
-        /*if (getId() == MinecraftClient.getInstance().player.getId() && entity != null){
-            ReachHud reachDisplayHud = (ReachHud) HudManager.getInstance().get(ReachHud.ID);
-            reachDisplayHud.updateDistance(this, entity);
-            ComboHud comboHud = (ComboHud) HudManager.getInstance().get(ComboHud.ID);
-            comboHud.onEntityAttack(entity);
-        }*/
-		if (entity != null){
+		MinecraftClient mc = MinecraftClient.getInstance();
+		assert mc != null;
+		assert mc.player != null;
+
+		if (getId() == mc.player.getId() && entity != null){
 			if ((Object) this == MinecraftClient.getInstance().player || entity.equals(MinecraftClient.getInstance().player)) {
 				
-				ReachHud reachDisplayHud = (ReachHud) HudManager.getInstance().get(ReachHud.ID);
-				reachDisplayHud.updateDistance(this, entity);
-				
+				if (mc.crosshairTarget != null){
+					ReachHud reachDisplayHud = (ReachHud) HudManager.getInstance().get(ReachHud.ID);
+					reachDisplayHud.updateDistance(this.getCameraPosVec(1).distanceTo(mc.crosshairTarget.getPos()));
+				}
+
 				ComboHud comboHud = (ComboHud) HudManager.getInstance().get(ComboHud.ID);
 				comboHud.onEntityAttack(entity);
 				

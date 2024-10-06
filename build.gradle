@@ -1,7 +1,7 @@
 plugins {
-    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'fabric-loom' version '1.6.12'
     id 'maven-publish'
-    id "io.freefair.lombok" version "8.0.1"
+    id "io.freefair.lombok" version "8.10.2"
 }
 
 apply from: 'https://raw.githubusercontent.com/Ypekkatre/GradleScripts/main/gradle/publish.gradle'

@@ -28,6 +28,10 @@ public class TPSHud extends SimpleTextHudEntry {
         return FORMATTER.format(tps) + " TPS";
     }
 
+    public double getNum() {
+	return tps;
+    }
+
     @Override
     public String getPlaceholder() {
         return "20.00 TPS";

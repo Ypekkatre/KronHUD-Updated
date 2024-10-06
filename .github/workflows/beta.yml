@@ -1,8 +1,6 @@
 on:
   push:
     branches:
-      - master
-      - main
       - 1.21.1
 jobs:
   build:

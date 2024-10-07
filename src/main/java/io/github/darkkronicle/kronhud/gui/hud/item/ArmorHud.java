@@ -50,15 +50,21 @@ public class ArmorHud extends TextHudEntry {
 
         if (stack.getMaxCount() == 1) {
             Item item = stack.getItem();
-            if (item instanceof PotionItem){
+            if (item instanceof PotionItem potionitem){
                 total = 0;
                 List<StatusEffectInstance> effects = PotionUtil.getPotion(stack).getEffects();
+                boolean isSplash = potionitem == Items.SPLASH_POTION;
+                boolean isLingering = potionitem == Items.LINGERING_POTION;
                 for (ItemStack st : ItemUtil.getItems(client)){
                     if (st == null) continue;
                     Item it = st.getItem();
                     if (it == null) continue;
-                    if (it instanceof PotionItem){
-                        if (PotionUtil.getPotion(st).getEffects().equals(effects)) total += 1;
+                    if (it instanceof PotionItem potionitem2){
+                        boolean isSplash2 = potionitem2 == Items.SPLASH_POTION;
+                        boolean isLingering2 = potionitem2 == Items.LINGERING_POTION;
+                        if (PotionUtil.getPotion(st).getEffects().equals(effects)
+                                && isSplash == isSplash2
+                                && isLingering == isLingering2) total += 1;
                     }
                 }
             }

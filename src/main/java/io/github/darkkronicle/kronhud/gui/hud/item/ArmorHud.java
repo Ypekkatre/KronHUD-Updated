@@ -45,7 +45,7 @@ public class ArmorHud extends TextHudEntry {
 
     public void renderMainItem(DrawContext context, ItemStack stack, int x, int y) {
         RenderUtil.drawItem(context, stack, x, y);
-        int total = ItemUtil.getTotal(client, stack);;
+        int total = ItemUtil.getTotal(client, stack);
 
         if (stack.getMaxCount() == 1) {
             Item item = stack.getItem();

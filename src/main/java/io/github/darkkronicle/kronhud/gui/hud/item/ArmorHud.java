@@ -1,14 +1,12 @@
 package io.github.darkkronicle.kronhud.gui.hud.item;
 
 import io.github.darkkronicle.darkkore.util.render.RenderUtil;
-import io.github.darkkronicle.kronhud.KronHUD;
 import io.github.darkkronicle.kronhud.config.KronConfig;
 import io.github.darkkronicle.kronhud.gui.entry.TextHudEntry;
 import io.github.darkkronicle.kronhud.util.DrawPosition;
 import io.github.darkkronicle.kronhud.util.ItemUtil;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -46,7 +44,7 @@ public class ArmorHud extends TextHudEntry {
 
     public void renderMainItem(DrawContext context, ItemStack stack, int x, int y) {
         RenderUtil.drawItem(context, stack, x, y);
-        int total = ItemUtil.getTotal(client, stack);;
+        int total = ItemUtil.getTotal(client, stack);
 
         if (stack.getMaxCount() == 1) {
             Item item = stack.getItem();
